@@ -1,0 +1,7 @@
+{
+  "resource": "/{proxy+}",
+  "path": "/pdfconvert_convert",
+  "httpMethod": "POST",
+  "body": "ew0KICAiYXBpS2V5IjogImRlZmF1bHQiLA0KICAicGF5bG9hZCI6ICJUaGlzIGlzIHRoZSB0ZXN0IGVtYWlsLiIsDQogICJzZW5kZXIiOiAiIiwNCiAgImVtYWlsS2V5IjogIiINCn0=",
+  "isBase64Encoded": true
+}

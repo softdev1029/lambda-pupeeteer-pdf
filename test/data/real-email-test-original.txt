@@ -1,0 +1,592 @@
+Delivered-To: anpoxop@gmail.com
+Received: by 2002:a4f:1907:0:0:0:0:0 with SMTP id 7csp6961982ivz;
+        Mon, 11 Nov 2019 22:29:25 -0800 (PST)
+X-Google-Smtp-Source: APXvYqz39f3zYx62HMJJg59FwkuEXALE0R8sd2BK4syT0D2BgOKfIhLRrQxLLrmppA01Zp2bYoqt
+X-Received: by 2002:a17:906:cca:: with SMTP id l10mr26673103ejh.161.1573540165305;
+        Mon, 11 Nov 2019 22:29:25 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1573540165; cv=none;
+        d=google.com; s=arc-20160816;
+        b=ek+jWQKr4TTKr9UBDHm0GLuk/3poaWDxt5yFXgQ5CSnUVryp7TDhIIo6FKrnma0QiC
+         12rq1ubxKmBHfd4Aaq69HIzLY9C2mOhSkzWlepAuLgeAHUu8qkxkZYP5c8rNiPCE+CaB
+         vqbPAmybHglY+2XrCkWpdAG+dgNIJAbuHxzsL9rAW3xH9XFFRiwX6PVelh0Ss810tHHJ
+         fvgo8kt481EGA5Vnoo2JzhWUnrp4uSjaY2yK5oV3sCbLQQIYfGT+AjG38Hlhpwast7dS
+         McyFNjpj8MpmHHOMrfIoJefydkflRd2+uAlmtUzOhmNHI/JtqEDhIGb3MUjOockMCAIS
+         s5Og==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=subject:message-id:to:reply-to:mime-version:from:date
+         :dkim-signature:dkim-signature;
+        bh=5c1JmgvkHjTfcvIycw+tJ/G+jBjlykUbPK6F6PV9JU4=;
+        b=U8xoQM+lXMJg9UliEewi+crEdyh/cMl9Ueb5TToZlNxhwNav1rKK2ttOVCrSB2WRjz
+         6trphEN4lCUQ16ssUkAKjCNP4Se5kwDcpBz68guE5oPqYDkqxbCdI5Ja/lNbVXlrBBEy
+         dsmNjQTyMcnQcnqdk1u/JJNETWE1CrXSYyGitPuLFejBQlNP97LLSm8fKQAo5G5V32k8
+         aL+PjfASwuNVPP1DUvcSPr7M+GD4uaFbR6rXSGz2JJACOMpitbM06lHS2pFsCqvbDU+B
+         0LYFyq+1ZjTX0i2Pm5InjSihiwL4j/h9SAZgnJ+hdiId18SIyaGE5zSHAW3FL+wWEA//
+         E4QQ==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@tryshift.com header.s=s1 header.b=ICKSdL9x;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b=wE2WU85X;
+       spf=pass (google.com: domain of bounces+7582419-8b88-anpoxop=gmail.com@mail.tryshift.com designates 168.245.7.171 as permitted sender) smtp.mailfrom="bounces+7582419-8b88-anpoxop=gmail.com@mail.tryshift.com"
+Return-Path: <bounces+7582419-8b88-anpoxop=gmail.com@mail.tryshift.com>
+Received: from o1682457x171.outbound-mail.sendgrid.net (o1682457x171.outbound-mail.sendgrid.net. [168.245.7.171])
+        by mx.google.com with ESMTPS id n15si4549214ejj.68.2019.11.11.22.29.24
+        for <anpoxop@gmail.com>
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Mon, 11 Nov 2019 22:29:25 -0800 (PST)
+Received-SPF: pass (google.com: domain of bounces+7582419-8b88-anpoxop=gmail.com@mail.tryshift.com designates 168.245.7.171 as permitted sender) client-ip=168.245.7.171;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@tryshift.com header.s=s1 header.b=ICKSdL9x;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b=wE2WU85X;
+       spf=pass (google.com: domain of bounces+7582419-8b88-anpoxop=gmail.com@mail.tryshift.com designates 168.245.7.171 as permitted sender) smtp.mailfrom="bounces+7582419-8b88-anpoxop=gmail.com@mail.tryshift.com"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tryshift.com; h=content-type:from:mime-version:reply-to:to:subject; s=s1; bh=5c1JmgvkHjTfcvIycw+tJ/G+jBjlykUbPK6F6PV9JU4=; b=ICKSdL9x90pL6 A+SkE7MOrWhMH4pA1HSUd/QBq/14VHjV18OYp9EltfLjn25TkMeWsD1RCPxtrleg OcL0JgBYTEfvpXpVpiTivjb2P4ylGoJYGv6h1puPK6tPkWYIXETPHHMJh8eu7IXy /E9Boe92DpEJdra6+YL8lK/v0hJWj8=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sendgrid.info; h=content-type:from:mime-version:reply-to:to:subject:x-feedback-id; s=smtpapi; bh=5c1JmgvkHjTfcvIycw+tJ/G+jBjlykUbPK6F6PV9JU4=; b=wE 2WU85X23Yio3ORefxS376ZZJU79j2ymodjL7uDX7odVaRAG+/Bffc1gB5zNvjlU3 GU8QblvJff/cItHUf29dts630HeVKTyjEeuo30XTjD9YgC2ikEL4pk8YjpfZfDBt SGLeJDdSXqj3MVZC8gLuefUR2zBj9Yh1A+oC+pNAo=
+Received: by filter0220p1iad2.sendgrid.net with SMTP id filter0220p1iad2-23234-5DCA5142-17
+        2019-11-12 06:29:22.530484038 +0000 UTC m=+562378.213646285
+Received: from NzU4MjQxOQ (2.worker.customeriomail.com [130.211.229.195]) by ismtpd0086p1iad2.sendgrid.net (SG) with HTTP id MVGhRluSSoaY3_NhOPWr_Q Tue, 12 Nov 2019 06:29:22.475 +0000 (UTC)
+Content-Type: multipart/alternative; boundary=6879941880deb857cc4897f5b7491655ae232593573db136e35ca9f09abf
+Date: Tue, 12 Nov 2019 06:29:22 +0000 (UTC)
+From: Shift Team <hello@tryshift.com>
+Mime-Version: 1.0
+Reply-to: No Reply <no-reply@tryshift.com>
+To: anpoxop@gmail.com
+Message-ID: <MVGhRluSSoaY3_NhOPWr_Q@ismtpd0086p1iad2.sendgrid.net>
+Subject: The art of the keyboard shortcut. 🎨
+X-Report-Abuse-To: badactor@customer.io
+X-Mailer: Customer.io (RImgBAAAAW5eTWotk6WopjXVzoZeSw==; +https://whatis.customeriomail.com)
+X-SG-EID: 4c94jTDT+wxrXJdwviT8ZjgKurdum75iLyoZrrOB+vFdoa6CJ9h01gfcEGR/XGKzqjxsE95YOxMucW Q1LV4+jSud1qocwFFWOW5br25uAJPMJ/mSi33tdX+HUIw7pPCZ0S7cjcg6vgbeeIraIbOt5MSIW/b6 iIwjFqaEp/d+R6uGckGcifvKGzQzVwYWIDYO4IsT+z2VhKUbxhoGL3ydtA==
+X-SG-ID: YDTqBOjidbCUo/ar1oAtZgWT474qrxBSg+HhoBprpUlzkIsANUzgGBVHx2FyQTJqfY24FfOER2D6h2 SsSC2yQQ==
+X-Feedback-ID: 7582419:7eBUYe6znOP4azIb4gXazE1/yfMFcM1d0AfecSLMQr8=:7eBUYe6znOP4azIb4gXazE1/yfMFcM1d0AfecSLMQr8=:SG
+
+--6879941880deb857cc4897f5b7491655ae232593573db136e35ca9f09abf
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Mime-Version: 1.0
+
+tryshift.com
+( https://tryshift.com?utm_source=3Dcustomer.io )
+
+-------------------------
+Ready to become a master?
+-------------------------
+
+Navigate between accounts, zoom in and out, or switch tab views without lif=
+ting a finger (off your keyboard, that is).
+
+Here=E2=80=99s our guide to custom keyboard shortcuts ( https://tryshift.co=
+m/blog/news/quick-guide-shift-keyboard-shortcuts/?utm_source=3Dcustomer.io =
+), or use Cmd/Ctrl + / in Shift for a quick reference on the go.
+
+( https://tryshift.com/blog/news/quick-guide-shift-keyboard-shortcuts/?utm_=
+source=3Dcustomer.io )
+Try Them Out ( https://tryshift.com/blog/news/quick-guide-shift-keyboard-sh=
+ortcuts/?utm_source=3Dcustomer.io )
+
+Shift helps people and teams across industries get things done. Check out w=
+hat our customers ( https://tryshift.com/reviews/?utm_source=3Dcustomer.io =
+) are saying.
+
+( https://tryshift.com/reviews/?utm_source=3Dcustomer.io )
+
+( https://www.facebook.com/sharer/sharer.php?u=3Dhttps://tryshift.com&utm_s=
+ource=3Dcustomer.io )
+( https://twitter.com/intent/tweet?url=3Dhttps://tryshift.com&text=3DShift%=
+20is%20the%20best%20way%20to%20manage%20multiple%20Gmail%20accounts!%20I%20=
+dare%20you%20to%20try%20it&via=3DGet_Shift&hashtags=3DGetShiftDone&utm_sour=
+ce=3Dcustomer.io )
+( https://www.instagram.com/tryshift/?utm_source=3Dcustomer.io )
+
+=C2=A9 2019 REDBRICK. All Rights Reserved.
+
+Redbrick Technologies Inc. 520 - 1515 Douglas Street. Victoria, BC, V8W 2G4=
+, Canada.
+
+Shift for Gmail is not sponsored by or affiliated with Google, Inc., regist=
+ered in the U.S. and other countries.
+
+Gmail is a trademark of Google, Inc.
+
+tryshift.com ( https://tryshift.com?utm_source=3Dcustomer.io )
+
+Unsubscribe ( https://tryshift.com/unsubscribe/616e706f786f7040676d61696c2e=
+636f6d/?utm_source=3Dcustomer.io )
+
+Privacy ( https://tryshift.com/privacy?utm_source=3Dcustomer.io )
+--6879941880deb857cc4897f5b7491655ae232593573db136e35ca9f09abf
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+Mime-Version: 1.0
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w=
+3.org/TR/REC-html40/loose.dtd"><html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8"/>
+    <meta charset=3D"utf-8"/>
+    <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge"/>
+    <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=
+=3D1"/>
+
+    <style type=3D"text/css">
+        body, .body {
+            font-family: Arial;
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 1.44;
+            color: #484a53;
+            letter-spacing: normal;
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 40px;
+            text-align: left;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: bold;
+            text-align: center;
+            color: #1b1d24;
+            margin-bottom: 20px;
+            line-height: normal;
+        }
+       =20
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1b1d24;
+            margin-bottom: 20px;
+            margin-top: 0;
+            text-align: center;
+        }
+       =20
+        p {
+            text-align: center;
+        }
+       =20
+        b {
+            font-weight: bold;
+            color: #1b1d24;
+        }
+       =20
+        .lead {
+            font-weight: bold;
+            color: #1b1d24;
+        }
+       =20
+        .sub {
+            font-size: 14px;
+            color: #86878a;
+        }
+       =20
+        .small {
+            font-size: 14px;
+        }
+       =20
+        img, video {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+        }
+       =20
+        ol {
+            padding-left: 20px;
+            line-height: 30px;
+        }
+       =20
+        ul {
+            padding-left: 20px;
+            line-height: 30px;
+        }
+       =20
+        a {
+            color: #4883ff;
+            text-decoration: inherit !important;
+            font-weight: bold;
+        }
+       =20
+        .header {
+            margin-bottom: 40px;
+            position: relative;
+        }
+       =20
+        .logo {
+            margin: 0;
+            height: 40px;
+            width: 121px;
+        }
+       =20
+        .link {
+            border-radius: 20px;
+            background-color: #f5f7fa;
+            color: #1b1d24;
+            font-size: 14px;
+            padding: 12px 20px;
+        }
+       =20
+        .stoplight {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+       =20
+        .stoplight-div {
+            width: 16px;
+            height: 16px;
+            border-radius: 12px;
+            display: inline-block;
+            vertical-align: top;
+            margin: 5px;
+        }
+       =20
+        .stoplight-blue {
+            background-color: #4285f4;
+           =20
+        }
+
+        .stoplight-green {
+            background-color: #41b161;
+        }
+
+        .stoplight-yellow {
+            background-color: #fbc32e;
+        }
+
+        .stoplight-red {
+            background-color: #eb4e43;
+        }
+       =20
+        .cheers {
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+       =20
+        .cheers-img {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+            width: 30px;
+            height: 30px;
+        }
+       =20
+        .cheers-p {
+            font-size: 12px;
+            line-height: 15px;
+            color: #494a54;
+            display: inline-block;
+            vertical-align: middle;
+            font-weight: bold;
+            text-align: left;
+        }
+       =20
+        .footer {
+            text-align: center;
+            border-top: solid 1px #e5e7eb;
+            padding-top: 30px;
+            margin-top: 30px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .coupon-blue {
+            padding: 20px 40px;
+            border-radius: 4px;
+            border: dashed 1px #1f87ff;
+            background-color: #f3f8ff;
+            text-align: center;
+            color: #1f87ff;
+            width: fit-content;
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: auto;
+            margin-right: auto;
+        }
+       =20
+        .coupon-green {
+            padding: 20px 40px;
+            border-radius: 4px;
+            border: dashed 1px #09b959;
+            background-color: #e7ffee;
+            text-align: center;
+            color: #09b959;
+            width: fit-content;
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: auto;
+            margin-right: auto;
+        }
+       =20
+        .coupon-red {
+            padding: 20px 40px;
+            border-radius: 4px;
+            border: dashed 1px #e53243;
+            background-color: #ffefee;
+            text-align: center;
+            color: #e53243;
+            width: fit-content;
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: auto;
+            margin-right: auto;
+        }
+       =20
+        .rectangle-blue {
+            padding: 20px;
+            border-radius: 4px;
+            border: solid 1px #1f87ff;
+            background-color: rgba(31, 135, 255, 0.1);
+            color: #1f87ff;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+       =20
+        .btn {
+            padding: 12px 38px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ffffff;
+            display: block;
+            max-width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            white-space: nowrap;
+        }
+       =20
+        .btn-large {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            padding: 18px 45px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            display: block;
+            max-width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            white-space: nowrap;
+            border-radius: 30px;
+        }
+       =20
+        .btn-blue {
+            box-shadow: 0 6px 10px 0 rgba(0, 115, 255, 0.2);
+            background-image: linear-gradient(to bottom, #1f87ff, #0077ff);
+        }
+
+        .btn-green {
+            box-shadow: 0 6px 10px 0 rgba(9, 185, 89, 0.1);
+            background-image: linear-gradient(to bottom, #09b959, #09a952);
+        }
+       =20
+        .btn-red {
+            box-shadow: 0 6px 10px 0 rgba(229, 50, 67, 0.1);
+            background-image: linear-gradient(to bottom, #ef4858, #e53243);
+        }
+
+        .btn-facebook {
+            background-color: #3b5998;
+        }
+       =20
+        .btn-twitter {
+            background-color: #2aa3f0;
+        }
+       =20
+        .btn-contacts {
+            background-color: #857beb;
+        }
+
+        .btn-referral {
+            width: 150px;
+            text-align: center;
+            max-width: unset;
+            margin-top: 20px;
+        }
+       =20
+        .btn-area {
+            background: url('https://tryshiftcdn.com/static/images/uploads/=
+email-pattern.png') repeat #1b1d24;
+            padding: 80px 40px;
+            font-size: 26px;
+            font-weight: bold;
+            line-height: 1.46;
+            color: #ffffff !important;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+    </style>
+  </head>
+  <body style=3D"font-family: Arial; font-weight: normal; font-size: 18px; =
+line-height: 1.44; color: #484a53; letter-spacing: normal; max-width: 640px=
+; text-align: left; margin: 0 auto; padding: 40px;">
+    <div class=3D"header" style=3D"margin-bottom: 40px; position: relative;=
+">
+        <img class=3D"logo" src=3D"https://tryshiftcdn.com/static/images/up=
+loads/email-logo.png" style=3D"max-width: 100%; height: 40px; width: 121px;=
+ margin: 0;"/>
+     =20
+        <a style=3D"float: right; color: #4883ff; text-decoration: inherit =
+!important; font-weight: bold;" href=3D"http://e.customeriomail.com/e/c/eyJ=
+lbWFpbF9pZCI6IlJJbWdCQUFBQVc1ZVRXb3RrNldvcGpYVnpvWmVTdz09IiwiaHJlZiI6Imh0dH=
+BzOi8vdHJ5c2hpZnQuY29tP3V0bV9zb3VyY2U9Y3VzdG9tZXIuaW8iLCJsaW5rX2lkIjoxLCJwb=
+3NpdGlvbiI6MH0/10e35cfc47c5834e188935e0cd4f09e7633025dd96e8c3d5930f3ad9f047=
+e637">
+            <div class=3D"link" style=3D"border-radius: 20px; background-co=
+lor: #f5f7fa; color: #1b1d24; font-size: 14px; padding: 12px 20px;">
+                <img style=3D"vertical-align: middle; height: 9px; margin-l=
+eft: auto; margin-right: auto; max-width: 100%;" src=3D"https://tryshiftcdn=
+.com/static/images/uploads/email-right.png"/>
+                <span style=3D"margin-left: 10px; vertical-align: middle;">=
+tryshift.com</span>
+            </div>
+        </a>
+    </div>
+    <div class=3D"stoplight" style=3D"text-align: center; margin-bottom: 40=
+px;" align=3D"center">
+        <div class=3D"stoplight-blue stoplight-div" style=3D"width: 16px; h=
+eight: 16px; border-radius: 12px; display: inline-block; vertical-align: to=
+p; background-color: #4285f4; margin: 5px;"></div>
+        <div class=3D"stoplight-green stoplight-div" style=3D"width: 16px; =
+height: 16px; border-radius: 12px; display: inline-block; vertical-align: t=
+op; background-color: #41b161; margin: 5px;"></div>
+        <div class=3D"stoplight-yellow stoplight-div" style=3D"width: 16px;=
+ height: 16px; border-radius: 12px; display: inline-block; vertical-align: =
+top; background-color: #fbc32e; margin: 5px;"></div>
+        <div class=3D"stoplight-red stoplight-div" style=3D"width: 16px; he=
+ight: 16px; border-radius: 12px; display: inline-block; vertical-align: top=
+; background-color: #eb4e43; margin: 5px;"></div>
+    </div>
+    <h2 style=3D"font-size: 24px; font-weight: bold; color: #1b1d24; margin=
+-bottom: 20px; margin-top: 0; text-align: center;" align=3D"center">Ready t=
+o become a master?</h2>
+<p style=3D"text-align: center;" align=3D"center">
+    Navigate between accounts, zoom in and out, or switch tab views without=
+ lifting a finger (off your keyboard, that is). </p>
+    <p style=3D"text-align: center;" align=3D"center">Here=E2=80=99s our <a=
+ href=3D"http://e.customeriomail.com/e/c/eyJlbWFpbF9pZCI6IlJJbWdCQUFBQVc1ZV=
+RXb3RrNldvcGpYVnpvWmVTdz09IiwiaHJlZiI6Imh0dHBzOi8vdHJ5c2hpZnQuY29tL2Jsb2cvb=
+mV3cy9xdWljay1ndWlkZS1zaGlmdC1rZXlib2FyZC1zaG9ydGN1dHMvP3V0bV9zb3VyY2U9Y3Vz=
+dG9tZXIuaW8iLCJsaW5rX2lkIjoxODEsInBvc2l0aW9uIjoxfQ/da5807aa8515cdfdaa4fa4a6=
+55477f189d60d2dd3b0e25871f3a950ef609c476" style=3D"color: #4883ff; text-dec=
+oration: inherit !important; font-weight: bold;">guide to custom keyboard s=
+hortcuts</a>, or use <b style=3D"font-weight: bold; color: #1b1d24;">Cmd/Ct=
+rl + /</b> in Shift for a quick reference on the go.
+</p>
+<a style=3D"text-align: center; color: #4883ff; text-decoration: inherit !i=
+mportant; font-weight: bold;" href=3D"http://e.customeriomail.com/e/c/eyJlb=
+WFpbF9pZCI6IlJJbWdCQUFBQVc1ZVRXb3RrNldvcGpYVnpvWmVTdz09IiwiaHJlZiI6Imh0dHBz=
+Oi8vdHJ5c2hpZnQuY29tL2Jsb2cvbmV3cy9xdWljay1ndWlkZS1zaGlmdC1rZXlib2FyZC1zaG9=
+ydGN1dHMvP3V0bV9zb3VyY2U9Y3VzdG9tZXIuaW8iLCJsaW5rX2lkIjoxODEsInBvc2l0aW9uIj=
+oyfQ/f8ae047caec93fe0aff11cc0a8aaf5c6cc81a227ac3e93fc9f485eb737360130">
+    <img style=3D"width: 100%; margin-left: auto; margin-right: auto; max-w=
+idth: 100%;" src=3D"https://tryshiftcdn.com/static/images/uploads/keyboard-=
+shortcut-image.jpg"/>
+</a>
+<a class=3D"btn-large btn-blue" href=3D"http://e.customeriomail.com/e/c/eyJ=
+lbWFpbF9pZCI6IlJJbWdCQUFBQVc1ZVRXb3RrNldvcGpYVnpvWmVTdz09IiwiaHJlZiI6Imh0dH=
+BzOi8vdHJ5c2hpZnQuY29tL2Jsb2cvbmV3cy9xdWljay1ndWlkZS1zaGlmdC1rZXlib2FyZC1za=
+G9ydGN1dHMvP3V0bV9zb3VyY2U9Y3VzdG9tZXIuaW8iLCJsaW5rX2lkIjoxODEsInBvc2l0aW9u=
+IjozfQ/3e61f4281e0437c7f0ebea2804c9951fdb1ce407421145c981226d0b3107ddd9" st=
+yle=3D"color: #ffffff; text-decoration: inherit !important; font-weight: bo=
+ld; font-size: 16px; display: block; max-width: fit-content; white-space: n=
+owrap; border-radius: 30px; box-shadow: 0 6px 10px 0 rgba(0, 115, 255, 0.2)=
+; background-image: linear-gradient(to bottom, #1f87ff, #0077ff); margin: 4=
+0px auto; padding: 18px 45px;">Try Them Out</a>
+<p style=3D"text-align: center;" align=3D"center">
+    Shift helps people and teams across industries get things done. Check o=
+ut what our <a href=3D"http://e.customeriomail.com/e/c/eyJlbWFpbF9pZCI6IlJJ=
+bWdCQUFBQVc1ZVRXb3RrNldvcGpYVnpvWmVTdz09IiwiaHJlZiI6Imh0dHBzOi8vdHJ5c2hpZnQ=
+uY29tL3Jldmlld3MvP3V0bV9zb3VyY2U9Y3VzdG9tZXIuaW8iLCJsaW5rX2lkIjoxNDUsInBvc2=
+l0aW9uIjo0fQ/bb16a372a695d6a3a5f46a4b04f0db8b69743cf0fa99ae301e1d91d945aa59=
+5d" style=3D"color: #4883ff; text-decoration: inherit !important; font-weig=
+ht: bold;">customers</a> are saying.
+</p>
+<a href=3D"http://e.customeriomail.com/e/c/eyJlbWFpbF9pZCI6IlJJbWdCQUFBQVc1=
+ZVRXb3RrNldvcGpYVnpvWmVTdz09IiwiaHJlZiI6Imh0dHBzOi8vdHJ5c2hpZnQuY29tL3Jldml=
+ld3MvP3V0bV9zb3VyY2U9Y3VzdG9tZXIuaW8iLCJsaW5rX2lkIjoxNDUsInBvc2l0aW9uIjo1fQ=
+/14cd7e569411b71903b775a0ed03a85cdbb5234f4b32ba60eace5f329abdf3a1" style=3D=
+"color: #4883ff; text-decoration: inherit !important; font-weight: bold;">
+    <img src=3D"https://tryshiftcdn.com/static/images/uploads/shift-quotes-=
+hannah-w@2x.jpg" style=3D"max-width: 100%; margin-left: auto; margin-right:=
+ auto;"/>
+</a>
+
+    <div class=3D"footer" style=3D"text-align: center; border-top-color: #e=
+5e7eb; border-top-width: 1px; border-top-style: solid; padding-top: 30px; m=
+argin-top: 30px; margin-left: auto; margin-right: auto;" align=3D"center">
+        <a href=3D"http://e.customeriomail.com/e/c/eyJlbWFpbF9pZCI6IlJJbWdC=
+QUFBQVc1ZVRXb3RrNldvcGpYVnpvWmVTdz09IiwiaHJlZiI6Imh0dHBzOi8vd3d3LmZhY2Vib29=
+rLmNvbS9zaGFyZXIvc2hhcmVyLnBocD91PWh0dHBzOi8vdHJ5c2hpZnQuY29tXHUwMDI2dXRtX3=
+NvdXJjZT1jdXN0b21lci5pbyIsImxpbmtfaWQiOjIsInBvc2l0aW9uIjo2fQ/7197e056887ea9=
+01f5c052dc4dccfb059f81e9257e739db3396683671e396078" target=3D"_blank" style=
+=3D"color: #4883ff; text-decoration: inherit !important; font-weight: bold;=
+">
+          <img style=3D"height: 32px; margin-left: auto; margin-right: auto=
+; max-width: 100%;" src=3D"https://tryshiftcdn.com/static/images/uploads/em=
+ail-facebook.png"/>
+        </a>
+        <a href=3D"http://e.customeriomail.com/e/c/eyJlbWFpbF9pZCI6IlJJbWdC=
+QUFBQVc1ZVRXb3RrNldvcGpYVnpvWmVTdz09IiwiaHJlZiI6Imh0dHBzOi8vdHdpdHRlci5jb20=
+vaW50ZW50L3R3ZWV0P3VybD1odHRwczovL3RyeXNoaWZ0LmNvbVx1MDAyNnRleHQ9U2hpZnQlMj=
+BpcyUyMHRoZSUyMGJlc3QlMjB3YXklMjB0byUyMG1hbmFnZSUyMG11bHRpcGxlJTIwR21haWwlM=
+jBhY2NvdW50cyElMjBJJTIwZGFyZSUyMHlvdSUyMHRvJTIwdHJ5JTIwaXRcdTAwMjZ2aWE9R2V0=
+X1NoaWZ0XHUwMDI2aGFzaHRhZ3M9R2V0U2hpZnREb25lXHUwMDI2dXRtX3NvdXJjZT1jdXN0b21=
+lci5pbyIsImxpbmtfaWQiOjIxMiwicG9zaXRpb24iOjd9/0ac89616a2ac718b07f811baa790e=
+ed47f746a7d3073aa8618a77a00ce9f977a" target=3D"_blank" style=3D"color: #488=
+3ff; text-decoration: inherit !important; font-weight: bold;">
+          <img style=3D"height: 32px; margin-left: 10px; margin-right: 10px=
+; max-width: 100%;" src=3D"https://tryshiftcdn.com/static/images/uploads/em=
+ail-twitter.png"/>
+        </a>
+        <a href=3D"http://e.customeriomail.com/e/c/eyJlbWFpbF9pZCI6IlJJbWdC=
+QUFBQVc1ZVRXb3RrNldvcGpYVnpvWmVTdz09IiwiaHJlZiI6Imh0dHBzOi8vd3d3Lmluc3RhZ3J=
+hbS5jb20vdHJ5c2hpZnQvP3V0bV9zb3VyY2U9Y3VzdG9tZXIuaW8iLCJsaW5rX2lkIjo0LCJwb3=
+NpdGlvbiI6OH0/d362323d4a8f31e281f82294d907891628af3c0ff9f9ed71d8baa2a432a23=
+292" target=3D"_blank" style=3D"color: #4883ff; text-decoration: inherit !i=
+mportant; font-weight: bold;">
+          <img style=3D"height: 32px; margin-left: auto; margin-right: auto=
+; max-width: 100%;" src=3D"https://tryshiftcdn.com/static/images/uploads/em=
+ail-instagram.png"/>
+        </a>
+        <p style=3D"font-size: 12px; font-weight: bold; margin-top: 20px; m=
+argin-bottom: 10px; text-align: center;" align=3D"center">
+            =C2=A9 2019 REDBRICK. All Rights Reserved.
+        </p>
+        <p style=3D"font-size: 10px; color: #86878a; line-height: 20px; mar=
+gin-bottom: 10px; text-align: center;" align=3D"center">
+            Redbrick Technologies Inc. 520 - 1515 Douglas Street. Victoria,=
+ BC, V8W 2G4, Canada.<br/>
+            Shift for Gmail is not sponsored by or affiliated with Google, =
+Inc., registered in the U.S. and other countries.<br/>
+            Gmail is a trademark of Google, Inc.
+        </p>
+        <div style=3D"margin: 0;">
+            <a style=3D"font-size: 10px; font-weight: bold; color: #4883ff;=
+ text-decoration: inherit !important;" href=3D"http://e.customeriomail.com/=
+e/c/eyJlbWFpbF9pZCI6IlJJbWdCQUFBQVc1ZVRXb3RrNldvcGpYVnpvWmVTdz09IiwiaHJlZiI=
+6Imh0dHBzOi8vdHJ5c2hpZnQuY29tP3V0bV9zb3VyY2U9Y3VzdG9tZXIuaW8iLCJsaW5rX2lkIj=
+oxLCJwb3NpdGlvbiI6OX0/0325e5eaa87c7d754e0db6d5d8aa6d47c4880ddfddceecb5b065e=
+ce722f298cd" target=3D"_blank">tryshift.com</a>
+            <div style=3D"display: inline-block; width: 4px; height: 4px; b=
+order-radius: 2px; background-color: #484a53; margin-left: 5px; margin-righ=
+t: 5px; margin-bottom: 2px;"></div>
+            <a style=3D"font-size: 10px; font-weight: bold; color: #4883ff;=
+ text-decoration: inherit !important;" href=3D"http://e.customeriomail.com/=
+e/c/eyJlbWFpbF9pZCI6IlJJbWdCQUFBQVc1ZVRXb3RrNldvcGpYVnpvWmVTdz09IiwiaHJlZiI=
+6Imh0dHBzOi8vdHJ5c2hpZnQuY29tL3Vuc3Vic2NyaWJlLzYxNmU3MDZmNzg2ZjcwNDA2NzZkNj=
+E2OTZjMmU2MzZmNmQvP3V0bV9zb3VyY2U9Y3VzdG9tZXIuaW8iLCJsaW5rX2lkIjo1LCJwb3Npd=
+GlvbiI6MTB9/69578eef11e02c85427437356e553ece958107fb2ae661677cf79c03603f6cb=
+f" target=3D"_blank">Unsubscribe</a>
+            <div style=3D"display: inline-block; width: 4px; height: 4px; b=
+order-radius: 2px; background-color: #484a53; margin-left: 5px; margin-righ=
+t: 5px; margin-bottom: 2px;"></div>
+            <a style=3D"font-size: 10px; font-weight: bold; color: #4883ff;=
+ text-decoration: inherit !important;" href=3D"http://e.customeriomail.com/=
+e/c/eyJlbWFpbF9pZCI6IlJJbWdCQUFBQVc1ZVRXb3RrNldvcGpYVnpvWmVTdz09IiwiaHJlZiI=
+6Imh0dHBzOi8vdHJ5c2hpZnQuY29tL3ByaXZhY3k_dXRtX3NvdXJjZT1jdXN0b21lci5pbyIsIm=
+xpbmtfaWQiOjksInBvc2l0aW9uIjoxMX0/f5bb403e1368e7fd9ce9dfee3e73e8f0825481073=
+2c200ab9b4bf95a3f430fa4" target=3D"_blank">Privacy</a>
+        </div>
+    </div>
+ =20
+
+<img src=3D"http://e.customeriomail.com/e/o/eyJlbWFpbF9pZCI6IlJJbWdCQUFBQVc=
+1ZVRXb3RrNldvcGpYVnpvWmVTdz09In0=3D" style=3D"height: 1px !important; max-h=
+eight: 1px !important; max-width: 1px !important; width: 1px !important"/><=
+/body></html>
+--6879941880deb857cc4897f5b7491655ae232593573db136e35ca9f09abf--

@@ -1,0 +1,6 @@
+[
+  "+*",
+  "+email1@address1.com",
+  "-email2@address2.com",
+  "+sender@example.com"
+]

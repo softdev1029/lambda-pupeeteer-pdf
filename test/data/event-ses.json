@@ -1,0 +1,47 @@
+{
+  "Records": [{
+    "eventSource": "aws:ses",
+    "eventVersion": "1.0",
+    "ses": {
+      "mail": {
+        "source": "prvs=144d0cba7=sender@example.com",
+        "messageId": "test-email",
+        "destination": ["recipient@example.com"],
+        "headersTruncated": false,
+        "headers": [{
+          "name": "Return-Path",
+          "value": "<prvs=144d0cba7=sender@example.com>"
+        }, {
+          "name": "From",
+          "value": "\"Doe, John\" <sender@example.com>"
+        }, {
+          "name": "To",
+          "value": "\"recipient@example.com\" <recipient@example.com>"
+        }, {
+          "name": "Message-ID",
+          "value": "<F8098FDD-49A3-442D-9935-F6112example@example.com>"
+        }, {
+          "name": "References",
+          "value": "<1FCED16B-F6B0-4506-A6F0-594DFexample@example.com>"
+        }, {
+          "name": "In-Reply-To",
+          "value": "<1FCED16B-F6B0-4506-A6F0-594DFexample@example.com>"
+        }],
+        "commonHeaders": {
+          "returnPath": "prvs=144d0cba7=sender@example.com",
+          "from": ["\"Doe, John\" <sender@example.com>"],
+          "to": ["\"recipient@example.com\" <recipient@example.com>"],
+          "messageId": "<F8098FDD-49A3-442D-9935-F6112B195BDA@example.com>"
+        }
+      },
+      "receipt": {
+        "recipients": ["recipient@example.com"],
+        "action": {
+          "type": "Lambda",
+          "functionArn": "arn:aws:lambda:us-east-1:123456789012:function:IncomingEmail",
+          "invocationType": "Event"
+        }
+      }
+    }
+  }]
+}

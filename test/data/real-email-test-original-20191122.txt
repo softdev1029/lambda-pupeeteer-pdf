@@ -1,0 +1,622 @@
+Return-Path: <anpoxop@gmail.com>
+Received: from mail-io1-f43.google.com (mail-io1-f43.google.com [209.85.166.43])
+ by inbound-smtp.us-west-2.amazonaws.com with SMTP id a7a073rqt8pr6md8kgqnjt3ghpnjqd7pgg0p5b01
+ for pdf@convert.tapdone.com;
+ Tue, 19 Nov 2019 23:36:38 +0000 (UTC)
+X-SES-Spam-Verdict: PASS
+X-SES-Virus-Verdict: PASS
+Received-SPF: pass (spfCheck: domain of _spf.google.com designates 209.85.166.43 as permitted sender) client-ip=209.85.166.43; envelope-from=anpoxop@gmail.com; helo=mail-io1-f43.google.com;
+Authentication-Results: amazonses.com;
+ spf=pass (spfCheck: domain of _spf.google.com designates 209.85.166.43 as permitted sender) client-ip=209.85.166.43; envelope-from=anpoxop@gmail.com; helo=mail-io1-f43.google.com;
+ dkim=pass header.i=@gmail.com;
+ dmarc=pass header.from=gmail.com;
+X-SES-RECEIPT: AEFBQUFBQUFBQUFGTzBsSEhWZXgwRHBGTGltS0h4RmczblNlK3MrRWszSldsL1FrV1N1NmlmaE5DSzJqQW11b0tXeE1KbHE4eTZnNUgyYTVQVXJCMXFFNDM0M2NXc0x3RFlLOFMrUW4xbGhSTjVhV0Z5WUorbi9MMER6TThDbmxNMlhScC83bDF2SzJ2Qlc5b1REWDQyMS9Ea0xQZjRwejhFeWR1cDRvMExXeGw5OTZXMzRYWXA2czZqRktlQ0tHVDBPbDJxa09FeXRqSDRHWnNBYThtR244UjR5YS9HWXBkSWJLdGRnanFWZG1PQnBxR1RRZkQvSG9xNjZ6Nmwyby8zejI4K1hsWjVqblIwOWNuSEh2T1Y5eXVCNDdFQXZxMTltNnl5V2xLTk9UOGUxeHVsK3pkK0E9PQ==
+X-SES-DKIM-SIGNATURE: a=rsa-sha256; q=dns/txt; b=HHv2Y+c1kZufUFbL9K5qYFTuhBPH7yCi7rF4bJSVBTiSZ05lNfBm2PtB2y8q5n1WLkQndi5UZ40pd7NmN75ftJSyPaBgFlv/YU4aAQpNjgfPKEZJPnhIuCPI9YN0e/0VpTj04tDWnmJtnvu+aM8RzDsYeBr8Zt0ZUnPey5DQBho=; c=relaxed/simple; s=gdwg2y3kokkkj5a55z2ilkup5wp5hhxx; d=amazonses.com; t=1574206599; v=1; bh=bwtsxt/geV6qBNQjIYrxzdNVjRo2yd8qK0LuTuzHVh0=; h=From:To:Cc:Bcc:Subject:Date:Message-ID:MIME-Version:Content-Type:X-SES-RECEIPT;
+Received: by mail-io1-f43.google.com with SMTP id r144so25409522iod.8
+        for <pdf@convert.tapdone.com>; Tue, 19 Nov 2019 15:36:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=S7bZ4fAy11yuT1uAoy9zWTwig9wFbSLjCMhLsPp7itU=;
+        b=dfup8PNW6MLYyH8oCp2Bs5xH6S8eXg/eDnD+MLypBctiSHB6CkANiSbW+CZ8j7sy8n
+         z9i8GODxEnpibOIJNIXAYc4Per9LgWlf/iZDRTbOFf9nTSi9mNcJoLZirPEdRhZO8lUH
+         sr+d5h4yrgZEqoXWGabRX4XoMPe9gtp7AsiZ68X7+CzaA6MV0n5AQ1nAYLS+flcggpox
+         SB0FoZEsKfNZRE34dJt5NjbeUw0ephqy9YiWe8TIjJhbhwUveBfb/PwgiqYoKZks5IAB
+         ZrH0ktr6qLx3LeBZc5MCF2fOVl6/YqPVpeomDx0uIJA0/qsrIPzv4oyvTy1CbQ3UE2LC
+         515A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=S7bZ4fAy11yuT1uAoy9zWTwig9wFbSLjCMhLsPp7itU=;
+        b=VmcePqsrVSMXawIjKDIyw0kUr5WIgCiXkmlfiFXUcqlMMT2/zmpGBzLnOB32vZW3Ty
+         QzJtEle2JXQmed20HAkrBhKdk9SWK8UhMOQMy5UqleSPEhBe8HGR1rXvKbtLJe/EzyaU
+         9ff9jjym8IsljxVkJ7X2qc2f97reHriZTSSWtImd2cuGGHHp925XjUzvG0mQTCNExd2t
+         A5SC4duRGEkpvsOBb/vQrl669oN4tXCD4veSJK8SvI70YMYrjqaMxgc8k3c3dWuWItIj
+         b94B2UXNZ/a260R2Y3qW7V/hfDLL5vM2N1/AJ63Ei88HkMcbjHknit5iTfWBPbUVJn6/
+         uL5g==
+X-Gm-Message-State: APjAAAWcjTRybIq/DYTNOTINJLmZZp6pcCgJJYJnwCayopFnyD7XrQp4
+	bCrICnV+JWBgCNHoMDTG0hDtXsikKFkPuuD2lw7rt0Fx
+X-Google-Smtp-Source: APXvYqy4CYg9R8uYCNpv6yaM/3wfgnNB59AuTlwNgPAfrQGnYbqNT3lSHrH06VVjhRqQqx8WLATC6FaZ7ci6iR5adVM=
+X-Received: by 2002:a6b:6807:: with SMTP id d7mr2876323ioc.150.1574206597161;
+ Tue, 19 Nov 2019 15:36:37 -0800 (PST)
+MIME-Version: 1.0
+References: <2e5e9ff2-1a0e-48e7-b2de-f21302a781ea@xtinmta1331.xt.local>
+In-Reply-To: <2e5e9ff2-1a0e-48e7-b2de-f21302a781ea@xtinmta1331.xt.local>
+From: alexey prohorenko <anpoxop@gmail.com>
+Date: Tue, 19 Nov 2019 15:35:25 -0800
+Message-ID: <CAHVWdSk+p5==w1prpeEKUWi1HeW2oXs2B2osP4VYqJgJOSGhwQ@mail.gmail.com>
+Subject: Fwd: Thank you for your Best Buy purchase. Now get 50 million songs
+ FREE for 3 months with Apple Music
+To: pdf@convert.tapdone.com
+Content-Type: multipart/alternative; boundary="00000000000006ebfc0597bb8998"
+apiKey: apiKey1
+
+--00000000000006ebfc0597bb8998
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+---------- Forwarded message ---------
+From: Best Buy <BestBuyInfo@emailinfo.bestbuy.com>
+Date: Mon, Nov 18, 2019 at 5:56 PM
+Subject: Thank you for your Best Buy purchase. Now get 50 million songs
+FREE for 3 months with Apple Music
+To: <alexeypr@me.com>
+
+
+View:  Web
+<https://view.emailinfo2.bestbuy.com/?qs=3D6b100ee6d8a7a0fb59101d915b1bacdd=
+8ff5a242eca81118899f4756a08e06ad0841b1c24a6f1454f79ab44522d86995deabc439c62=
+61c1e76607da0678db657fb7a7a2f453b342c3c8354a1a8c49e23>
+[image: BEST BUY]
+<https://click.emailinfo2.bestbuy.com/?qs=3D7e5f4ebe1bd2c52fc7ac5fd3e5b7f73=
+278a99a856b69b41ec2d3532a4d6626c790466c9ac46701c3e805f0f41378006d56fbe5e21b=
+e52568>
+[image:
+GEEK SQUAD]
+<https://click.emailinfo2.bestbuy.com/?qs=3Daa3c13754f006649c96bf23a16fe060=
+a3edad848a863621d158ad5748020c19d012f3d22ab1d33ac76ada1bd4ce4527f5e1dc0a732=
+0a0049>
+
+
+Thank you for your Best Buy purchase. Now get 50 million songs FREE for 3
+months with Apple Music
+
+Listen to over 50 million songs, all ad-free. Download anything then listen
+anywhere, data-free. And there=E2=80=99s no commitment, so you can cancel a=
+nytime.
+This offer is for new Apple Music subscribers only.
+
+Go to www.apple.co/emailbb <http://%20www.apple.co/emailbb>
+
+
+Please do not hesitate to contact us with additional questions at
+1-888-BEST BUY (1-888-237-8289)
+
+
+
+Deal of the Day
+<https://click.emailinfo2.bestbuy.com/?qs=3Dc3b203883326568f1333cc9d0e9e345=
+778fafc0d6a2b557be3da0fe4eedd2c20129fcc8f799c4f3e1169ea53c08e0a14af99fd77a3=
+54a421>
+Geek Squad
+<https://click.emailinfo2.bestbuy.com/?qs=3Ddefffbbe155bf2635a1a0a0b758462c=
+d20d512c659a1db9591bf8a3c0b2235628181c3bb8aa98968628ad9a37e2ca48e5c9cc1df93=
+3e32a8>
+Credit Cards
+<https://click.emailinfo2.bestbuy.com/?qs=3Dbc1ab71353205e178ccd8934a5f4d40=
+d0614ee644ad43a4be4ab5ee66d6777c98a6549616a0a0b364c37ade29ce6e436d2db3ee6f1=
+df0ecd>
+Customer Service
+<https://click.emailinfo2.bestbuy.com/?qs=3D15d947ac66b7165e1fe6a5f585177af=
+3592801f3d5d561617eb6a66a47d0d6a38527d2ffa2986f9f22732049a767e692f5d4d012f5=
+fd6ef6>
+
+Follow us and share your story
+
+
+[image: Facebook]
+<https://click.emailinfo2.bestbuy.com/u/?qs=3D5388cc19110b4b43f2a5850b2252d=
+f489aa56e5cab17c539c8f68e03899ece7e0aabd040c0f67c4e0334e6d4f6ad7fd061826673=
+ab69e487>
+[image: Twitter]
+<https://click.emailinfo2.bestbuy.com/u/?qs=3D875f47bfb24eacd782bbd90763f80=
+8b507efc7d7e99b460980730774717b053e03768a70d024b36a378465605adf97b03d999025=
+eb3bba16>
+[image: Instagram]
+<https://click.emailinfo2.bestbuy.com/u/?qs=3D84b6cef9fcaa4181836995ac5aae9=
+9d93ca8af19b7f3b7d82a2fdf91ec9682c73564b1d6a812b8e5b5f45baa6f525995287a3144=
+b8e5733d>
+[image: Pinterest]
+<https://click.emailinfo2.bestbuy.com/u/?qs=3D6a5f849a2141535d3718f07fbd711=
+736de00a6f0b82de75758a92c0f6aa942bdf0cd1be104e6883ac6388864c8b9b39f08c57b36=
+ce6734cd>
+[image: LinkedIn]
+<https://click.emailinfo2.bestbuy.com/u/?qs=3D4f63651bec124293fe2ddae2dc5f7=
+d415306ffed0a0233100695213b00dfcd60cafa72fa71674ee11a19538e26d7d824d5ac29df=
+bb7eeac3>
+
+Your privacy is important to Best Buy. For more information on how Best Buy
+protects your privacy, steps you can take to protect your personal
+information and alerts on privacy risks facing consumers, please visit the =
+Best
+Buy Privacy Hub
+<https://click.emailinfo2.bestbuy.com/?qs=3D548ec50bcf4e036b85ea99f3a274c46=
+ab72c089c71b5e88a391fe32682db7402d4d8cf91d89026f86be6bb39813e945820d6fa0a0f=
+38527e>
+.
+Best Buy 7601 Penn Avenue South, Richfield, MN 55423-3645
+=C2=A9 2019 Best Buy. All rights reserved.
+
+--00000000000006ebfc0597bb8998
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"font-family:monospac=
+e,monospace"><br></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" clas=
+s=3D"gmail_attr">---------- Forwarded message ---------<br>From: <strong cl=
+ass=3D"gmail_sendername" dir=3D"auto">Best Buy</strong> <span dir=3D"auto">=
+&lt;<a href=3D"mailto:BestBuyInfo@emailinfo.bestbuy.com">BestBuyInfo@emaili=
+nfo.bestbuy.com</a>&gt;</span><br>Date: Mon, Nov 18, 2019 at 5:56 PM<br>Sub=
+ject: Thank you for your Best Buy purchase. Now get 50 million songs FREE f=
+or 3 months with Apple Music<br>To:  &lt;<a href=3D"mailto:alexeypr@me.com"=
+>alexeypr@me.com</a>&gt;<br></div><br><br>
+
+<span style=3D"display:block;color:red"></span>
+
+=20
+ <u></u>
+
+
+
+=09
+	=09
+=09
+=09
+=09
+=09
+=09
+
+<div style=3D"margin-top:0px!important;margin-bottom:0px!important;margin-r=
+ight:0px!important;margin-left:0px!important;padding-top:0px;padding-bottom=
+:0px;padding-right:0px;padding-left:0px;background:#f4f4f6;background-color=
+:#f4f4f6" bgcolor=3D"#f4f4f6">
+
+=20
+
+=20
+=20
+<div style=3D"font-size:1px;display:none!important"></div>   =20
+
+=20
+ <img src=3D"https://click.emailinfo2.bestbuy.com/open.aspx?ffcb10-fe9b1570=
+746507787c-fe2e10787265017f711571-fef31d77766c05-ff9b1771-fe3a1075746405787=
+61472-febe1d737063067a&amp;d=3D10115" width=3D"1" height=3D"1">
+
+=20
+ <center style=3D"width:100%;table-layout:fixed;background-color:#f4f4f6">
+  <div style=3D"max-width:640px;margin-top:0px;margin-bottom:0px;margin-rig=
+ht:auto;margin-left:auto">
+
+   <table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=3D"0">
+    <tbody><tr>
+     <td bgcolor=3D"#f4f4f6" style=3D"padding:0px 0px 20px 0px">
+  =20
+     =20
+      <table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" border=3D=
+"0" style=3D"border-spacing:0;font-family:Arial,sans-serif;color:#1d252c;Ma=
+rgin:0 auto;width:100%;max-width:640px" bgcolor=3D"#ffffff">
+
+      =20
+
+	=09
+		<tbody><tr>
+			<td align=3D"left" valign=3D"top">
+				<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%">
+					<tbody><tr>
+						<td align=3D"left" valign=3D"bottom" bgcolor=3D"#f4f4f6">
+							<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100=
+%">
+								<tbody><tr>
+									<td align=3D"left" valign=3D"bottom" style=3D"padding:5px 5px 7px =
+15px;font:10px Arial;color:#1d252c">
+										View:=C2=A0=C2=A0<a href=3D"https://view.emailinfo2.bestbuy.com/?=
+qs=3D6b100ee6d8a7a0fb59101d915b1bacdd8ff5a242eca81118899f4756a08e06ad0841b1=
+c24a6f1454f79ab44522d86995deabc439c6261c1e76607da0678db657fb7a7a2f453b342c3=
+c8354a1a8c49e23" style=3D"text-decoration:none;color:#0046be" target=3D"_bl=
+ank">Web</a>
+									</td>
+								</tr>
+							</tbody></table>
+						</td>
+					</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+	=09
+		<tr>
+			<td align=3D"left" valign=3D"middle" width=3D"640" bgcolor=3D"#0046bf" s=
+tyle=3D"background-color:#0046bf">
+				<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"width:=
+174px">
+					<tbody><tr>
+						<td width=3D"87" align=3D"left" valign=3D"top" style=3D"font:14px Ari=
+al;font-weight:bold;color:#ffffff">
+							<a href=3D"https://click.emailinfo2.bestbuy.com/?qs=3D7e5f4ebe1bd2c5=
+2fc7ac5fd3e5b7f73278a99a856b69b41ec2d3532a4d6626c790466c9ac46701c3e805f0f41=
+378006d56fbe5e21be52568" style=3D"color:#ffffff;text-decoration:none" targe=
+t=3D"_blank">
+								<img alt=3D"BEST BUY" src=3D"http://image.emailinfo2.bestbuy.com/li=
+b/fef41d77766c04/m/69/BBYGS_DUAL_TOPNAV1.jpg" width=3D"87" height=3D"66" bo=
+rder=3D"0" style=3D"border-width:0;width:100%;max-width:87px;min-width:87px=
+;height:auto;display:block">
+							</a>
+						</td>
+						<td width=3D"87" align=3D"left" valign=3D"top" style=3D"font:14px Ari=
+al;font-weight:bold;color:#ffffff">
+							<a href=3D"https://click.emailinfo2.bestbuy.com/?qs=3Daa3c13754f0066=
+49c96bf23a16fe060a3edad848a863621d158ad5748020c19d012f3d22ab1d33ac76ada1bd4=
+ce4527f5e1dc0a7320a0049" style=3D"color:#ffffff;text-decoration:none" targe=
+t=3D"_blank">
+								<img alt=3D"GEEK SQUAD" src=3D"http://image.emailinfo2.bestbuy.com/=
+lib/fef41d77766c04/m/69/BBYGS_DUAL_TOPNAV2.jpg" width=3D"87" height=3D"66" =
+border=3D"0" style=3D"border-width:0;width:100%;max-width:87px;min-width:87=
+px;height:auto;display:block">
+							</a>
+						</td>
+					</tr>
+				</tbody></table>
+			</td>
+		</tr>
+		<tr>
+			<td bgcolor=3D"#ffffff">
+				<div style=3D"font-size:6px;line-height:6px">=C2=A0</div>
+			</td>
+		</tr>
+	=09
+
+      =20
+
+       =20
+        <tr>
+         <td bgcolor=3D"#ffffff" style=3D"padding-top:25px;padding-bottom:0=
+px;padding-right:0px;padding-left:0px;text-align:center;font-size:0;backgro=
+und-color:#ffffff">
+         =20
+          <div style=3D"text-align:center;display:inline-block;width:100%;m=
+ax-width:320px;vertical-align:top">
+           <table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=
+=3D"0" style=3D"border-spacing:0">
+            <tbody><tr>
+             <td style=3D"padding-top:0px;padding-bottom:0px;padding-right:=
+0px;padding-left:0px">
+              <table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" style=
+=3D"border-spacing:0;width:100%;font-size:14px;text-align:left" align=3D"ce=
+nter">
+               <tbody><tr>
+                <td style=3D"padding:0px 20px 15px 20px;font:14px Arial;col=
+or:#1d252c">
+                =20
+                 <span style=3D"padding:0px 0px 20px 0px;font-size:26px;fon=
+t-family:Arial,Helvetica,sans-serif;font-weight:bold;color:#0046be;line-hei=
+ght:27px">Thank you for your Best Buy purchase. Now get 50 million songs FR=
+EE for 3 months with Apple Music</span>
+                 <br><br>
+
+                 Listen to over 50 million songs, all ad-free. Download any=
+thing then listen anywhere, data-free. And there=E2=80=99s no commitment, s=
+o you can cancel anytime.  This offer is for new Apple Music subscribers on=
+ly.
+                 <br><br>
+
+                =20
+                  Go to <a href=3D"http://%20www.apple.co/emailbb" style=3D=
+"text-decoration:underline;color:#0046be" target=3D"_blank"> www.apple.co/e=
+mailbb </a><br><br>
+                  <br>
+                =20
+
+                =20
+
+                =20
+
+                =20
+                  Please do not hesitate to contact us with additional ques=
+tions at 1-888-BEST BUY (1-888-237-8289)
+                  <br><br>
+                =20
+
+                =20
+
+                                =20
+
+                </td>
+               </tr>
+              </tbody></table>
+             </td>
+            </tr>
+           </tbody></table>
+          </div>
+         =20
+          <div style=3D"text-align:center;display:inline-block;width:100%;m=
+ax-width:320px;vertical-align:top">
+           <table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=
+=3D"0" style=3D"border-spacing:0">
+            <tbody><tr>
+             <td align=3D"center" style=3D"padding-top:0px;padding-bottom:0=
+px;padding-right:0px;padding-left:0px">
+
+             =20
+               <img alt=3D"" src=3D"http://image.emailinfo2.bestbuy.com/lib=
+/fef31d77766c05/m/6/6131dfed-6937-4208-962d-4862a6c824eb.jpg" border=3D"0" =
+width=3D"250" style=3D"display:block;max-width:250px">
+               <br>
+             =20
+
+             </td>
+            </tr>
+           </tbody></table>
+          </div>
+         =20
+         </td>
+        </tr>
+       =20
+
+      =20
+
+
+      =20
+       <tr>
+        <td align=3D"left" valign=3D"top">
+	=09
+
+		</td></tr><tr>
+			<td bgcolor=3D"#ffffff">
+				<div style=3D"font-size:6px;line-height:6px">=C2=A0</div>
+			</td>
+		</tr>
+	=09
+	=09
+
+			<tr>
+				<td bgcolor=3D"#0046be">
+					<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=3D"0"=
+ style=3D"border-spacing:0">
+						<tbody><tr>
+
+							<td bgcolor=3D"#0046be" style=3D"text-align:center;font-size:0">
+							=09
+								<div style=3D"text-align:center;display:inline-block;width:50%;max-=
+width:160px;min-width:160px;vertical-align:top;border-bottom:solid 1px #e0e=
+6ef;text-align:center">
+									<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=
+=3D"0" style=3D"border-spacing:0;text-align:center">
+										<tbody><tr>
+											<td align=3D"center" style=3D"font-family:Arial,sans-serif;color=
+:#ffffff;width:160px;font-size:13px;padding-top:12px;padding-bottom:13px;fo=
+nt-weight:bold">
+												<a href=3D"https://click.emailinfo2.bestbuy.com/?qs=3Dc3b203883=
+326568f1333cc9d0e9e345778fafc0d6a2b557be3da0fe4eedd2c20129fcc8f799c4f3e1169=
+ea53c08e0a14af99fd77a354a421" style=3D"text-decoration:none;color:#ffffff;t=
+ext-align:center" target=3D"_blank">Deal of the Day</a>
+											</td>
+										</tr>
+									</tbody></table>
+								</div>
+							=09
+								<div style=3D"text-align:center;display:inline-block;width:50%;max-=
+width:160px;min-width:160px;vertical-align:top;border-bottom:solid 1px #e0e=
+6ef;text-align:center">
+									<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=
+=3D"0" style=3D"border-spacing:0;text-align:center">
+										<tbody><tr>
+											<td align=3D"center" style=3D"font-family:Arial,sans-serif;color=
+:#ffffff;width:160px;font-size:13px;padding-top:12px;padding-bottom:13px;fo=
+nt-weight:bold">
+												<a href=3D"https://click.emailinfo2.bestbuy.com/?qs=3Ddefffbbe1=
+55bf2635a1a0a0b758462cd20d512c659a1db9591bf8a3c0b2235628181c3bb8aa98968628a=
+d9a37e2ca48e5c9cc1df933e32a8" style=3D"text-decoration:none;color:#ffffff;t=
+ext-align:center" target=3D"_blank">Geek Squad</a>
+											</td>
+										</tr>
+									</tbody></table>
+								</div>
+							=09
+								<div style=3D"text-align:center;display:inline-block;width:50%;max-=
+width:160px;min-width:160px;vertical-align:top;border-bottom:solid 1px #e0e=
+6ef;text-align:center">
+									<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=
+=3D"0" style=3D"border-spacing:0;text-align:center">
+										<tbody><tr>
+											<td align=3D"center" style=3D"font-family:Arial,sans-serif;color=
+:#ffffff;width:160px;font-size:13px;padding-top:12px;padding-bottom:13px;fo=
+nt-weight:bold">
+												<a href=3D"https://click.emailinfo2.bestbuy.com/?qs=3Dbc1ab7135=
+3205e178ccd8934a5f4d40d0614ee644ad43a4be4ab5ee66d6777c98a6549616a0a0b364c37=
+ade29ce6e436d2db3ee6f1df0ecd" style=3D"text-decoration:none;color:#ffffff;t=
+ext-align:center" target=3D"_blank">Credit Cards</a>
+											</td>
+										</tr>
+									</tbody></table>
+								</div>
+							=09
+								<div style=3D"text-align:center;display:inline-block;width:50%;max-=
+width:160px;min-width:160px;vertical-align:top;border-bottom:solid 1px #e0e=
+6ef;text-align:center">
+									<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=
+=3D"0" style=3D"border-spacing:0;text-align:center">
+										<tbody><tr>
+											<td align=3D"center" style=3D"font-family:Arial,sans-serif;color=
+:#ffffff;width:160px;font-size:13px;padding-top:12px;padding-bottom:13px;fo=
+nt-weight:bold;text-align:center">
+												<a href=3D"https://click.emailinfo2.bestbuy.com/?qs=3D15d947ac6=
+6b7165e1fe6a5f585177af3592801f3d5d561617eb6a66a47d0d6a38527d2ffa2986f9f2273=
+2049a767e692f5d4d012f5fd6ef6" style=3D"text-decoration:none;color:#ffffff" =
+target=3D"_blank">Customer Service</a>
+											</td>
+										</tr>
+									</tbody></table>
+								</div>
+							=09
+							</td>
+						</tr>
+					</tbody></table>
+				</td>
+			</tr>
+
+	=09
+
+			<tr>
+				<td bgcolor=3D"#0046be">
+					<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=3D"0"=
+ style=3D"border-spacing:0">
+				=09
+						<tbody><tr>
+							<td bgcolor=3D"#0046be" style=3D"text-align:center;font-size:0">
+								<div style=3D"text-align:center;display:inline-block;width:100%;max=
+-width:235px;min-width:235px;vertical-align:top;overflow:hidden">
+									<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=
+=3D"0" style=3D"border-spacing:0;text-align:left">
+										<tbody><tr>
+											<td align=3D"center" style=3D"font-family:Arial,sans-serif;color=
+:#ffffff;width:640px;font-size:13px;font-weight:bold">
+												<div style=3D"font-size:12px;line-height:12px">=C2=A0</div>
+												Follow us and share your story
+												<div style=3D"font-size:12px;line-height:12px">=C2=A0</div>
+											</td>
+										</tr>
+									</tbody></table>
+								</div>
+						=09
+								<div style=3D"text-align:center;display:inline-block;width:50%;max-=
+width:180px;min-width:180px;vertical-align:top;overflow:hidden">
+									<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=
+=3D"0" style=3D"border-spacing:0;text-align:left">
+										<tbody><tr>
+											<td align=3D"center" style=3D"font-family:Arial,sans-serif;color=
+:#ffffff;width:320px;font-size:14px">
+												<div style=3D"font-size:8px;line-height:8px">=C2=A0</div>
+												<a href=3D"https://click.emailinfo2.bestbuy.com/u/?qs=3D5388cc1=
+9110b4b43f2a5850b2252df489aa56e5cab17c539c8f68e03899ece7e0aabd040c0f67c4e03=
+34e6d4f6ad7fd061826673ab69e487" style=3D"text-decoration:none;color:#ffffff=
+" target=3D"_blank"><img src=3D"http://image.emailinfo2.bestbuy.com/lib/fef=
+31d77766c05/m/6/icon-social-fb.gif" width=3D"24" height=3D"24" align=3D"abs=
+middle" alt=3D"Facebook" style=3D"width:24px;height:24px"></a>=C2=A0
+												<a href=3D"https://click.emailinfo2.bestbuy.com/u/?qs=3D875f47b=
+fb24eacd782bbd90763f808b507efc7d7e99b460980730774717b053e03768a70d024b36a37=
+8465605adf97b03d999025eb3bba16" style=3D"text-decoration:none;color:#ffffff=
+" target=3D"_blank"><img src=3D"http://image.emailinfo2.bestbuy.com/lib/fef=
+31d77766c05/m/6/icon-social-tw.gif" width=3D"24" height=3D"24" align=3D"abs=
+middle" alt=3D"Twitter" style=3D"width:24px;height:24px"></a>=C2=A0
+												<a href=3D"https://click.emailinfo2.bestbuy.com/u/?qs=3D84b6cef=
+9fcaa4181836995ac5aae99d93ca8af19b7f3b7d82a2fdf91ec9682c73564b1d6a812b8e5b5=
+f45baa6f525995287a3144b8e5733d" style=3D"text-decoration:none;color:#ffffff=
+" target=3D"_blank"><img src=3D"http://image.emailinfo2.bestbuy.com/lib/fef=
+31d77766c05/m/6/icon-social-ig.gif" width=3D"24" height=3D"24" align=3D"abs=
+middle" alt=3D"Instagram" style=3D"width:24px;height:24px"></a>=C2=A0
+												<a href=3D"https://click.emailinfo2.bestbuy.com/u/?qs=3D6a5f849=
+a2141535d3718f07fbd711736de00a6f0b82de75758a92c0f6aa942bdf0cd1be104e6883ac6=
+388864c8b9b39f08c57b36ce6734cd" style=3D"text-decoration:none;color:#ffffff=
+" target=3D"_blank"><img src=3D"http://image.emailinfo2.bestbuy.com/lib/fef=
+31d77766c05/m/6/icon-social-pi.gif" width=3D"24" height=3D"24" align=3D"abs=
+middle" alt=3D"Pinterest" style=3D"width:24px;height:24px"></a>=C2=A0
+												<a href=3D"https://click.emailinfo2.bestbuy.com/u/?qs=3D4f63651=
+bec124293fe2ddae2dc5f7d415306ffed0a0233100695213b00dfcd60cafa72fa71674ee11a=
+19538e26d7d824d5ac29dfbb7eeac3" style=3D"text-decoration:none;color:#ffffff=
+" target=3D"_blank"><img src=3D"http://image.emailinfo2.bestbuy.com/lib/fef=
+31d77766c05/m/6/icon-social-in.gif" width=3D"24" height=3D"24" align=3D"abs=
+middle" alt=3D"LinkedIn" style=3D"width:24px;height:24px"></a>
+												<div style=3D"font-size:8px;line-height:8px">=C2=A0</div>
+											</td>
+										</tr>
+									</tbody></table>
+								</div>
+							</td>
+						</tr>
+					</tbody></table>
+				</td>
+			</tr>
+
+	=09
+
+			<tr>
+				<td style=3D"display:none">
+					<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%"=
+>
+=09
+
+=09
+	<tbody><tr><td><u></u>
+	</td></tr><tr>
+		<td align=3D"left">
+			<div id=3D"m_-7680257355612028510_two50"></div><img id=3D"m_-76802573556=
+12028510_two50_img" src=3D"http://analytics.bestbuy.com/ea/ClOtRzLHiM/?&amp=
+;e=3D451015302&amp;c=3DSDP_DigitalSKUs" width=3D"1" height=3D"1" style=3D"m=
+argin:0!important;padding:0!important;border:0!important;height:1px!importa=
+nt;width:1px!important">
+		</td>
+	</tr>
+
+</tbody></table>
+				</td>
+			</tr>
+=09
+      =20
+
+      =20
+       <tr>
+        <td align=3D"left" valign=3D"top" bgcolor=3D"#f4f4f6">
+         <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"1=
+00%">
+         =20
+          <tbody><tr>
+           <td align=3D"left" valign=3D"top" bgcolor=3D"#f4f4f6" style=3D"f=
+ont-family:Arial,Helvetica,sans-serif;font-size:10px;color:#1d252c;padding:=
+10px 10px 0px 10px">
+           =20
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%">				=
+					=09
+	=09
+	<tbody><tr>
+		<td align=3D"left" style=3D"font-family:Arial,Verdana,sans-serif;font-siz=
+e:10px;color:#1d252c">Your privacy is important to Best Buy. For more infor=
+mation on how Best Buy protects your privacy, steps you can take to protect=
+ your personal information and alerts on privacy risks facing consumers, pl=
+ease visit the <a href=3D"https://click.emailinfo2.bestbuy.com/?qs=3D548ec5=
+0bcf4e036b85ea99f3a274c46ab72c089c71b5e88a391fe32682db7402d4d8cf91d89026f86=
+be6bb39813e945820d6fa0a0f38527e" style=3D"font-family:Arial,sans-serif;font=
+-size:9px;color:#1d252c;text-decoration:underline" target=3D"_blank"><span =
+style=3D"color:#1d252c">Best Buy Privacy Hub</span></a>.</td>
+	</tr>
+</tbody></table>
+           </td>
+          </tr>
+
+         =20
+
+          <tr>
+           <td align=3D"left" valign=3D"top" bgcolor=3D"#f4f4f6" style=3D"f=
+ont:10px Arial;color:#1d252c;padding:10px 10px 0 10px">Best Buy 7601 Penn A=
+venue South, Richfield, MN 55423-3645</td>
+          </tr>
+          <tr>
+           <td align=3D"left" valign=3D"top" bgcolor=3D"#f4f4f6" style=3D"f=
+ont:10px Arial;color:#1d252c;padding:10px 10px 0px 10px">=C2=A9 2019 Best B=
+uy. All rights reserved.</td>
+          </tr>
+         </tbody></table>
+        </td>
+       </tr>
+      </tbody></table>
+     =20
+     </td>
+    </tr>
+   </tbody></table>
+  </div>
+=20
+
+</center></div>
+</div></div>
+
+--00000000000006ebfc0597bb8998--

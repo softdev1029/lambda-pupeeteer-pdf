@@ -1,0 +1,10 @@
+{
+  "lambda": {
+    "role": "pdfconvert_precheck-executor",
+    "name": "pdfconvert_precheck",
+    "region": "us-west-1"
+  },
+  "api": {
+    "id": "b9z3msxf9e"
+  }
+}

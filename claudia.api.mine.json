@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "role": "pdfconvert_api-executor",
+    "name": "pdfconvert_api",
+    "region": "us-west-1"
+  },
+  "api": {
+    "id": "ogqhy3eg12",
+    "module": "src/api"
+  }
+}

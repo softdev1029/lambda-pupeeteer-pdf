@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "role": "arn:aws:iam::961424413433:role/pdfconvert-lambda-executor",
+    "name": "pdfconvert_precheck",
+    "region": "us-west-1",
+    "sharedRole": true
+  },
+  "api": {
+    "id": "sh56fp7ite"
+  }
+}
